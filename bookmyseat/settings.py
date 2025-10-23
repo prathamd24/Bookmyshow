@@ -27,8 +27,10 @@ SECRET_KEY = 'django-insecure-c8aetlj(=vp90n@#yoc^&d(_6ivp(d!bv-4-f!r$lawptjzrwu
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'bookmyshow.vercel.app']
- # Replace with your actual Vercel URL
+ALLOWED_HOSTS = ['bookmyseat.vercel.app']  # Replace with your actual Vercel URL
+CSRF_TRUSTED_ORIGINS = ['https://bookmyseat.vercel.app']
+
+
 
 
 
