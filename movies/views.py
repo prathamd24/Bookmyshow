@@ -2,13 +2,6 @@ from django.shortcuts import render, redirect ,get_object_or_404
 from .models import Movie,Theater,Seat,Booking
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
-from django.shortcuts import render
-from .models import Movie
-
-def home(request):
-    movies = Movie.objects.all()
-    return render(request, 'home.html', {'movies': movies})
-
 
 def movie_list(request):
     search_query=request.GET.get('search')
