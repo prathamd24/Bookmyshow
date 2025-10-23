@@ -25,11 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-c8aetlj(=vp90n@#yoc^&d(_6ivp(d!bv-4-f!r$lawptjzrwu'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['bookmyseat.vercel.app']  # Replace with your actual Vercel URL
-CSRF_TRUSTED_ORIGINS = ['https://bookmyseat.vercel.app']
-
+ALLOWED_HOSTS = ['bookmyshow.vercel.app']
+CSRF_TRUSTED_ORIGINS = ['https://bookmyshow.vercel.app']
 
 
 
@@ -60,8 +59,6 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 
 ]
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 AUTH_USER_MODEL='auth.User'
 EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
