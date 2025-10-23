@@ -27,8 +27,8 @@ SECRET_KEY = 'django-insecure-c8aetlj(=vp90n@#yoc^&d(_6ivp(d!bv-4-f!r$lawptjzrwu
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['bookmyseat.vercel.app']
-CSRF_TRUSTED_ORIGINS = ['https://bookmyseat.vercel.app']
+ALLOWED_HOSTS = ['bookmyshow.vercel.app']
+CSRF_TRUSTED_ORIGINS = ['https://bookmyshow.vercel.app']
 
 
 
@@ -56,6 +56,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+
 ]
 
 AUTH_USER_MODEL='auth.User'
