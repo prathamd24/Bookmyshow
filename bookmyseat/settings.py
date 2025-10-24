@@ -94,8 +94,12 @@ DATABASES = {
     }
 }
 
-DATABASES['default'] = dj_database_url.parse('postgresql://django_bookmyshow_3s5h_user:7ahKMjf5N8IawDlDK99yh3iCmIvcGYtV@dpg-d3t5fkumcj7s73fgmkpg-a.oregon-postgres.render.com/django_bookmyshow_3s5h')
-# 
+DATABASES['default'] = dj_database_url.parse(
+    'postgresql://django_bookmyshow_3s5h_user:7ahKMjf5N8IawDlDK99yh3iCmIvcGYtV@dpg-d3t5fkumcj7s73fgmkpg-a.oregon-postgres.render.com/django_bookmyshow_3s5h',
+    conn_max_age=600,
+    ssl_require=True
+)
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -131,7 +135,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
