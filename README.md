@@ -6,7 +6,7 @@ A full-stack web application inspired by BookMyShow, built using Django. Users c
 
 ## 🚀 Live Demo
 
-🔗 [Visit the deployed site](https://bookmyshow-henna.vercel.app/)
+🔗 [Visit the deployed site](https://bookmyshow-plum.vercel.app/)
 
 ---
 
