@@ -90,17 +90,14 @@ WSGI_APPLICATION = 'bookmyseat.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+import dj_database_url
 
-
+import dj_database_url
 
 DATABASES = {
-    'default': dj_database_url.config(default=os.environ.get('postgresql://bookmyshow_gjic_user:drHdFqVBkJV8ZZs9BKMEJe0t6hgAWjlP@dpg-d3tlqnmr433s73dpqrqg-a.oregon-postgres.render.com/bookmyshow_gjicL'))
+    'default': dj_database_url.config(
+        default='postgresql://bookmyshow_gjic_user:drHdFqVBkJV8ZZs9BKMEJe0t6hgAWjlP@dpg-d3tlqnmr433s73dpqrqg-a.oregon-postgres.render.com/bookmyshow_gjic'
+    )
 }
 
 
