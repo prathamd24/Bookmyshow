@@ -97,7 +97,7 @@ DATABASES = {
     }
 }
 
-import dj_database_url
+
 
 DATABASES = {
     'default': dj_database_url.config(default=os.environ.get('postgresql://bookmyshow_gjic_user:drHdFqVBkJV8ZZs9BKMEJe0t6hgAWjlP@dpg-d3tlqnmr433s73dpqrqg-a.oregon-postgres.render.com/bookmyshow_gjicL'))
