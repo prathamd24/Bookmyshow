@@ -31,12 +31,12 @@ A full-stack web application inspired by BookMyShow, built using Django. Users c
 
 ## 📁 Project Structure
 
-bookmyseat/ 
+bookmyshow/ 
 ├── movies/ # Movie app with models, views, templates 
 ├── users/ # User app (optional for auth) 
 ├── templates/ # HTML templates 
 ├── static/ # CSS and static assets 
-├── bookmyseat/ # Project settings and URLs 
+├── bookmyshow/ # Project settings and URLs 
 ├── manage.py
 
 =======
