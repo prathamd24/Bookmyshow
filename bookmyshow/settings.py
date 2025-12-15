@@ -96,10 +96,7 @@ WSGI_APPLICATION = 'bookmyshow.wsgi.application'
 
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+   'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
 }
 DATABASES['default'] = dj_database_url.parse('postgresql://bookmyshow_gjic_user:drHdFqVBkJV8ZZs9BKMEJe0t6hgAWjlP@dpg-d3tlqnmr433s73dpqrqg-a.oregon-postgres.render.com/bookmyshow_gjic')
 
