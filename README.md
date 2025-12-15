@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🎬 BookMyShow Clone (Django)
 
 A full-stack web application inspired by BookMyShow, built using Django. Users can browse movies, view details, and (soon) book seats. Admins can manage movies, theaters, and bookings via the Django admin panel.
@@ -40,3 +41,6 @@ bookmyseat/
 ├── bookmyseat/ # Project settings and URLs 
 ├── manage.py
 
+=======
+# Bookmyshow
+>>>>>>> 6d61cd66f3b5383beca3f535e407c2768a3652ab
