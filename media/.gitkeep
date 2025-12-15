@@ -1,0 +1,3 @@
+touch media/.gitkeep
+git add media/.gitkeep
+git commit -m "Track media folder for uploads"
