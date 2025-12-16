@@ -11,12 +11,29 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-import os
 import dj_database_url
+import os
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# ✅ BASE_DIR MUST BE DEFINED FIRST
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# ✅ Local development → SQLite
+# ✅ Render deployment → PostgreSQL
+if os.environ.get("RENDER"):
+    DATABASES = {
+        'default': dj_database_url.config(
+            default='postgresql://bookuser:K2jmTY9GzYaSnHQm78COqtE7M9QgrUXP@dpg-d505j2ali9vc73e4pjj0-a.oregon-postgres.render.com/bookmyshow_3x0t?sslmode=require',
+            conn_max_age=600,
+            ssl_require=True
+        )
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -94,11 +111,6 @@ WSGI_APPLICATION = 'bookmyshow.wsgi.application'
 
 
 
-
-DATABASES = {
-   'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
-}
-DATABASES['default'] = dj_database_url.parse('postgresql://bookmyshow_gjic_user:drHdFqVBkJV8ZZs9BKMEJe0t6hgAWjlP@dpg-d3tlqnmr433s73dpqrqg-a.oregon-postgres.render.com/bookmyshow_gjic')
 
 
 
