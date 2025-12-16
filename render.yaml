@@ -3,7 +3,11 @@ services:
     name: bookmyshow
     env: python
     buildCommand: "pip install -r requirements.txt"
-    startCommand: 'python manage.py migrate && echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser(\"admin\", \"admin@example.com\", \"Admin@123\")" | python manage.py shell && sleep 10 && gunicorn bookmyshow.wsgi:application'
+    startCommand: >
+      python manage.py migrate &&
+      python manage.py shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.filter(username='admin').exists() or User.objects.create_superuser('admin', 'admin@example.com', 'Admin@123')" &&
+      sleep 10 &&
+      gunicorn bookmyshow.wsgi:application
     plan: free
     envVars:
       - key: SECRET_KEY
