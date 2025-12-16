@@ -4,6 +4,14 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import login,authenticate
 from django.contrib.auth.decorators import login_required
 from movies.models import Movie , Booking
+from django.contrib.auth.models import User
+from django.http import HttpResponse
+
+def check_admin_user(request):
+    exists = User.objects.filter(username='admin').exists()
+    return HttpResponse(f"Admin exists: {exists}")
+
+
 
 def home(request):
     movies= Movie.objects.all()
