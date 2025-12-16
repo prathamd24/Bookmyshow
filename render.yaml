@@ -3,7 +3,7 @@ services:
     name: bookmyshow
     env: python
     buildCommand: "pip install -r requirements.txt"
-    startCommand: "python manage.py migrate && gunicorn bookmyshow.wsgi:application"
+    startCommand: "python manage.py migrate && sleep 10 && gunicorn bookmyshow.wsgi:application"
     plan: free
     envVars:
       - key: SECRET_KEY
