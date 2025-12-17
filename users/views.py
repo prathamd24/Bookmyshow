@@ -13,9 +13,30 @@ def check_admin_user(request):
 
 
 
+GENRES = ['Action', 'Comedy', 'Drama', 'Horror', 'Romance', 'Thriller']
+LANGUAGES = ['Hindi', 'English', 'Tamil', 'Telugu']
+
 def home(request):
-    movies= Movie.objects.all()
-    return render(request,'home.html',{'movies':movies})
+    movies = Movie.objects.all()
+
+    selected_genre = request.GET.get('genre')
+    selected_language = request.GET.get('language')
+
+    if selected_genre and selected_genre != 'All':
+        movies = movies.filter(genre=selected_genre)
+
+    if selected_language and selected_language != 'All':
+        movies = movies.filter(language=selected_language)
+
+    context = {
+        'movies': movies,
+        'selected_genre': selected_genre,
+        'selected_language': selected_language,
+        'genres': GENRES,
+        'languages': LANGUAGES,
+    }
+    return render(request, 'home.html', context)
+
 def register(request):
     if request.method == 'POST':
         form=UserRegisterForm(request.POST)

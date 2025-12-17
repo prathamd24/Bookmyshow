@@ -1,4 +1,7 @@
-{% extends "users/basic.html" %} {% block content %}
+{% extends "users/basic.html" %}
+{% load static %}
+
+
 <style>
     body {
       font-family: "Arial", sans-serif;
@@ -56,8 +59,9 @@
       border-color: #0056b3;
     }
   </style>
-  
+  {% block content %}
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    
     <ol class="carousel-indicators">
       <li
         data-target="#carouselExampleIndicators"
@@ -120,9 +124,36 @@
       <a href="{% url 'register' %}" class="alert-link">Register</a> to continue.
     </div>
     {% endif %}
+    <div class="section-title">Filter Movies</div>
+    <form method="get" class="mb-4 d-flex gap-3">
+      <div>
+        <label for="genre">Genre:</label>
+        <select name="genre" id="genre" class="form-select">
+          <option value="All">All</option>
+          {% for g in genres %}
+            <option value="{{ g }}" {% if selected_genre == g %}selected{% endif %}>{{ g }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div>
+        <label for="language">Language:</label>
+        <select name="language" id="language" class="form-select">
+          <option value="All">All</option>
+          {% for l in languages %}
+            <option value="{{ l }}" {% if selected_language == l %}selected{% endif %}>{{ l }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="align-self-end">
+        <button type="submit" class="btn btn-primary">Filter</button>
+      </div>
+    </form>
   
     <div class="section-title">Recommended Movies</div>
     <div class="row">
+      
         {% if movies %}
       {% for movie in movies|slice:":4" %}
       <div class="col-md-3 col-sm-6">
@@ -138,12 +169,15 @@
             <div class="card-body d-flex flex-column justify-content-between">
               <h5 class="card-title text-center">{{ movie.name }}</h5>
               <p class="card-text text-center">{{ movie.description }}</p>
+              <p class="card-text text-center">Genre: {{ movie.genre }} | Language: {{ movie.language }}</p>
               <!-- Replace with the appropriate movie description field -->
             </div>
           </div>
         </a>
       </div>
       {% endfor %}
+      {% else %}
+        <p>No movies found for the selected filters.</p>
       {% endif %}
     </div>
   
@@ -367,10 +401,12 @@
       </div>
     </div>
   </div>
-  
+  {% endblock %}
+
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
   <script>
     $(document).ready(function () {
       $(".card").hover(
@@ -395,4 +431,4 @@
     </li>
     {% endfor %}
 </ul> -->
-{% endblock %}
+

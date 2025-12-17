@@ -3,14 +3,34 @@ from django.contrib.auth.models import User
 
 
 class Movie(models.Model):
-    name= models.CharField(max_length=255)
-    image= models.ImageField(upload_to="movies/")
-    rating = models.DecimalField(max_digits=3,decimal_places=1)
-    cast= models.TextField()
-    description= models.TextField(blank=True,null=True) # optional
+    GENRE_CHOICES = [
+        ('Action', 'Action'),
+        ('Comedy', 'Comedy'),
+        ('Drama', 'Drama'),
+        ('Horror', 'Horror'),
+        ('Romance', 'Romance'),
+        ('Thriller', 'Thriller'),
+    ]
+
+    LANGUAGE_CHOICES = [
+        ('Hindi', 'Hindi'),
+        ('English', 'English'),
+        ('Tamil', 'Tamil'),
+        ('Telugu', 'Telugu'),
+    ]
+
+    name = models.CharField(max_length=255)
+    image = models.ImageField(upload_to="movies/")
+    rating = models.DecimalField(max_digits=3, decimal_places=1)
+    cast = models.TextField()
+    description = models.TextField(blank=True, null=True)
+
+    genre = models.CharField(max_length=50, choices=GENRE_CHOICES, default='Action')
+    language = models.CharField(max_length=50, choices=LANGUAGE_CHOICES)
 
     def __str__(self):
         return self.name
+
 
 class Theater(models.Model):
     name = models.CharField(max_length=255)
