@@ -156,13 +156,14 @@
         </div>
   
         <div class="show-times">
-          <div class="time-box">
-            {{ theater.time }}
-            <a href="{% url 'book_seats' theater.id %}">
-              <span>Book Now</span>
-            </a>
-          </div>
-        </div>
+  <div class="time-box">
+    {{ theater.time }}
+    <a href="{% url 'seat_selection' theater.id %}" class="btn btn-primary">
+      <span>Book Now</span>
+    </a>
+  </div>
+</div>
+
         {% endfor %}
       {% else %}
         <!-- Message when no theaters are available -->

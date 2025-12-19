@@ -109,6 +109,16 @@ WSGI_APPLICATION = 'bookmyshow.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# settings.py
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'prathamkumarhr@gmail.com'          # your Gmail address
+EMAIL_HOST_PASSWORD = 'wsfaiflucnlcijbf'    # Google App Password
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
 
 
 
