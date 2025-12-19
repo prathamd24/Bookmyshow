@@ -12,7 +12,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # ✅ Initialise environment variables
 env = environ.Env()
 environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
-print(env("SECRET_KEY"))
 
 # ✅ Security
 SECRET_KEY = env("SECRET_KEY")

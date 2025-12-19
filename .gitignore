@@ -1,0 +1,11 @@
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Environment
+.env
+dot.env
+dot.ev
+
+# Static files
+staticfiles/
