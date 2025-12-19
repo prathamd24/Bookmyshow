@@ -15,8 +15,8 @@ environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
 # ✅ Security
 SECRET_KEY = env("SECRET_KEY")
-DEBUG = env.bool("DEBUG", default=False)
-ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1']
+DEBUG = True
+ALLOWED_HOSTS = ['*']
 
 # ✅ Database (auto-detects from DATABASE_URL in .env)
 DATABASES = {
@@ -71,7 +71,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'bookmyshow.wsgi.application'
 
 # ✅ Email
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
