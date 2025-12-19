@@ -71,9 +71,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'bookmyshow.wsgi.application'
 
 # ✅ Email
-EMAIL_BACKEND = "sendgrid_backend.sendgrid.SendgridBackend"
+EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
 SENDGRID_API_KEY = env("SENDGRID_API_KEY")
-DEFAULT_FROM_EMAIL = "prathamkumarhr@gmail.com"  # verified sender
+DEFAULT_FROM_EMAIL = "prathamkumarhr@gmail.com"  # must be verified in SendGrid
 
 # ✅ Media
 MEDIA_URL = '/media/'
