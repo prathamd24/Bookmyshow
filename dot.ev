@@ -1,1 +1,7 @@
+SECRET_KEY=django-insecure-your-secret-key-here
+DEBUG=False
+
+EMAIL_HOST_USER=prathamkumarhr@gmail.com
+EMAIL_HOST_PASSWORD=jigjmjgfwcvklscr
+
 DATABASE_URL=postgresql://bookuser:K2jmTY9GzYaSnHQm78COqtE7M9QgrUXP@dpg-d505j2ali9vc73e4pjj0-a.oregon-postgres.render.com/bookmyshow_3x0t?sslmode=require
