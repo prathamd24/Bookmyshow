@@ -60,7 +60,6 @@ def book_seats(request, theater_id):
     if request.method == 'POST':
         try:
             # Parse JSON body from fetch()
-            import json
             data = json.loads(request.body)
             seat_ids = data.get('seats', [])
             movie_id = data.get('movie_id')
@@ -108,9 +107,13 @@ def book_seats(request, theater_id):
                 email.send()
 
             if error_seats:
-                return JsonResponse({'status': 'error', 'message': f"Seats already booked: {', '.join(error_seats)}"}, status=400)
+                return JsonResponse({
+                    'status': 'error',
+                    'message': f"Seats already booked: {', '.join(error_seats)}"
+                }, status=400)
 
-            return JsonResponse({'status': 'success'})
+            # ✅ Redirect to profile page after success
+            return redirect('profile')
 
         except Exception as e:
             return JsonResponse({'status': 'error', 'message': str(e)}, status=500)

@@ -33,7 +33,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users',
     'movies',
-    'bookmyshow',
 ]
 
 # ✅ Middleware
@@ -49,7 +48,6 @@ MIDDLEWARE = [
 ]
 
 # ✅ Auth
-AUTH_USER_MODEL = 'auth.User'
 LOGIN_URL = '/login/'
 
 # ✅ Templates
@@ -73,7 +71,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'bookmyshow.wsgi.application'
 
 # ✅ Email
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True

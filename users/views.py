@@ -16,6 +16,9 @@ def check_admin_user(request):
 GENRES = ['Action', 'Comedy', 'Drama', 'Horror', 'Romance', 'Thriller']
 LANGUAGES = ['Hindi', 'English', 'Tamil', 'Telugu']
 
+@login_required
+def profile(request):
+    return render(request, 'users/profile.html')
 def home(request):
     movies = Movie.objects.all()
 
