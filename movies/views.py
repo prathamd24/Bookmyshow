@@ -55,11 +55,13 @@ def theater_list(request,movie_id):
     theater=Theater.objects.filter(movie=movie)
     return render(request,'movies/theater_list.html',{'movie':movie,'theaters':theater})
 
+from django.core.mail import EmailMessage
+from django.contrib import messages
+
 @login_required(login_url='/login/')
 def book_seats(request, theater_id):
     if request.method == 'POST':
         try:
-            # Parse JSON body from fetch()
             data = json.loads(request.body)
             seat_ids = data.get('seats', [])
             movie_id = data.get('movie_id')
@@ -88,7 +90,7 @@ def book_seats(request, theater_id):
                 seat.is_booked = True
                 seat.save()
 
-                # Send confirmation email
+                # ✅ Send confirmation email
                 subject = f"🎟 Ticket Confirmation for {movie.name}"
                 message = f"""
                     <h2>Hi {request.user.username},</h2>
@@ -102,9 +104,12 @@ def book_seats(request, theater_id):
                     <p>Enjoy your show! 🍿</p>
                     <p><em>BookMyShow Clone</em></p>
                 """
-                email = EmailMessage(subject, message, settings.DEFAULT_FROM_EMAIL, [request.user.email])
-                email.content_subtype = "html"
-                email.send()
+                try:
+                    email = EmailMessage(subject, message, settings.DEFAULT_FROM_EMAIL, [request.user.email])
+                    email.content_subtype = "html"
+                    email.send(fail_silently=False)  # ✅ force error if email fails
+                except Exception as e:
+                    return JsonResponse({'status': 'error', 'message': f"Email failed: {str(e)}"}, status=500)
 
             if error_seats:
                 return JsonResponse({
@@ -112,7 +117,8 @@ def book_seats(request, theater_id):
                     'message': f"Seats already booked: {', '.join(error_seats)}"
                 }, status=400)
 
-            # ✅ Redirect to profile page after success
+            # ✅ Add success message before redirect
+            messages.success(request, "Booking successful! Confirmation email sent.")
             return redirect('profile')
 
         except Exception as e:
