@@ -71,9 +71,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'bookmyshow.wsgi.application'
 
 # ✅ Email
-EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
-SENDGRID_API_KEY = env("SENDGRID_API_KEY")
-DEFAULT_FROM_EMAIL = "prathamkumarhr@gmail.com"  # must be verified in SendGrid
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.sendgrid.net"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = "apikey"  # literal string
+EMAIL_HOST_PASSWORD = env("SENDGRID_API_KEY")  # your API key from Render
+DEFAULT_FROM_EMAIL = "prathamkumarhr@gmail.com"
 
 # ✅ Media
 MEDIA_URL = '/media/'
