@@ -1,11 +1,28 @@
 # Python bytecode
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
 
-# Environment
+# Environment & secrets
 .env
+*.env
+*.env.*
 dot.env
 dot.ev
 
-# Static files
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Static files (collected)
 staticfiles/
+
+# Media uploads
+media/
+
+# IDE/editor files
+.vscode/
+.idea/
+*.swp

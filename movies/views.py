@@ -108,6 +108,7 @@ def book_seats(request, theater_id):
                     email = EmailMessage(subject, message, settings.DEFAULT_FROM_EMAIL, [request.user.email])
                     email.content_subtype = "html"
                     email.send(fail_silently=False)  # ✅ force error if email fails
+                    messages.success(request, "Booking confirmed! A confirmation email has been sent.")
                 except Exception as e:
                     return JsonResponse({'status': 'error', 'message': f"Email failed: {str(e)}"}, status=500)
 
