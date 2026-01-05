@@ -8,14 +8,13 @@ import environ
 
 # ✅ BASE_DIR
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+DEBUG=True
 # ✅ Initialise environment variables
 env = environ.Env()
 environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
 # ✅ Security
 SECRET_KEY = env("SECRET_KEY")
-DEBUG = env.bool("DEBUG", default=False)
 ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1']
 
 # ✅ Database (auto-detects from DATABASE_URL in .env)
