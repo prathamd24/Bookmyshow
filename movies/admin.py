@@ -3,7 +3,10 @@ from .models import Movie, Theater, Seat,Booking
 
 @admin.register(Movie)
 class MovieAdmin(admin.ModelAdmin):
-    list_display = ['name', 'rating', 'cast','description']
+    list_display = ('name', 'genre', 'language', 'rating')
+    search_fields = ('name', 'genre', 'language')
+    # ✅ Include trailer_url in the form
+    fields = ('name', 'genre', 'language', 'rating', 'description', 'cast', 'image', 'trailer_url')
 
 @admin.register(Theater)
 class TheaterAdmin(admin.ModelAdmin):

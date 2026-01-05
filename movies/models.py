@@ -19,14 +19,16 @@ class Movie(models.Model):
         ('Telugu', 'Telugu'),
     ]
 
-    name = models.CharField(max_length=255)
-    image = models.ImageField(upload_to="movies/")
-    rating = models.DecimalField(max_digits=3, decimal_places=1)
-    cast = models.TextField()
-    description = models.TextField(blank=True, null=True)
+    name = models.CharField(max_length=200)
+    genre = models.CharField(max_length=100)
+    language = models.CharField(max_length=100)
+    rating = models.FloatField()
+    description = models.TextField(default="No description available")
+    cast = models.CharField(max_length=200)
+    image = models.ImageField(upload_to='movies/', blank=True, null=True)
 
-    genre = models.CharField(max_length=50, choices=GENRE_CHOICES, default='Action')
-    language = models.CharField(max_length=50, choices=LANGUAGE_CHOICES)
+    # ✅ New field for YouTube trailer
+    trailer_url = models.URLField(blank=True, null=True, help_text="Paste YouTube trailer URL")
 
     def __str__(self):
         return self.name

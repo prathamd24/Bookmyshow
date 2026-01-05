@@ -9,13 +9,17 @@ import json
 from .models import Movie, Theater, Seat, Booking
 
 
+def movie_detail(request, movie_id):
+    movie = get_object_or_404(Movie, id=movie_id)
+    return render(request, 'movies/movie_detail.html', {'movie': movie})
+
+
+@login_required(login_url='/login/')
 def book_ticket(request, movie_id):
     movie = get_object_or_404(Movie, id=movie_id)
 
-    # Create booking
     booking = Booking.objects.create(user=request.user, movie=movie)
 
-    # Prepare email content
     subject = f"🎟 Ticket Confirmation for {movie.name}"
     message = f"""
         <h2>Hi {request.user.username},</h2>
@@ -30,19 +34,15 @@ def book_ticket(request, movie_id):
         <p><em>BookMyShow Clone</em></p>
     """
 
-    recipient_list = [request.user.email]
+    try:
+        email = EmailMessage(subject, message, settings.DEFAULT_FROM_EMAIL, [request.user.email])
+        email.content_subtype = "html"
+        email.send(fail_silently=False)
+        messages.success(request, "Booking confirmed! A confirmation email has been sent.")
+    except Exception as e:
+        messages.error(request, f"Booking created but email failed: {str(e)}")
 
-    # Send HTML email
-    email = EmailMessage(
-        subject,
-        message,
-        settings.DEFAULT_FROM_EMAIL,
-        recipient_list,
-    )
-    email.content_subtype = "html"  # send as HTML
-    email.send()
-
-    return redirect('profile')  # redirect after booking
+    return redirect('profile')
 
 
 def movie_list(request):
@@ -56,8 +56,8 @@ def movie_list(request):
 
 def theater_list(request, movie_id):
     movie = get_object_or_404(Movie, id=movie_id)
-    theater = Theater.objects.filter(movie=movie)
-    return render(request, 'movies/theater_list.html', {'movie': movie, 'theaters': theater})
+    theaters = Theater.objects.filter(movie=movie)
+    return render(request, 'movies/theater_list.html', {'movie': movie, 'theaters': theaters})
 
 
 @login_required(login_url='/login/')
@@ -80,7 +80,6 @@ def book_seats(request, theater_id):
             for seat_id in seat_ids:
                 seat = get_object_or_404(Seat, id=seat_id, theater=theater)
 
-                # Check if already booked
                 if seat.is_booked:
                     error_seats.append(seat.seat_number)
                     continue
@@ -95,7 +94,6 @@ def book_seats(request, theater_id):
                     seat.is_booked = True
                     seat.save()
 
-                    # ✅ Send confirmation email
                     subject = f"🎟 Ticket Confirmation for {movie.name}"
                     message = f"""
                         <h2>Hi {request.user.username},</h2>
@@ -112,10 +110,8 @@ def book_seats(request, theater_id):
                     email = EmailMessage(subject, message, settings.DEFAULT_FROM_EMAIL, [request.user.email])
                     email.content_subtype = "html"
                     email.send(fail_silently=False)
-                    messages.success(request, "Booking confirmed! A confirmation email has been sent.")
 
                 except IntegrityError:
-                    # Handle race condition if seat was booked in parallel
                     error_seats.append(seat.seat_number)
                     continue
                 except Exception as e:
@@ -141,6 +137,9 @@ def seat_selection(request, theater_id):
     theater = get_object_or_404(Theater, id=theater_id)
     seats = Seat.objects.filter(theater=theater)
     return render(request, 'movies/seat_selection.html', {
-        'theaters': theater,
+        'theater': theater,
         'seats': seats
     })
+def movie_detail(request, movie_id):
+    movie = get_object_or_404(Movie, id=movie_id)
+    return render(request, 'movies/movie_detail.html', {'movie': movie})

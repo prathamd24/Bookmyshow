@@ -1,0 +1,22 @@
+{% extends "users/basic.html" %}
+
+{% block content %}
+<div class="container py-5">
+  <h1>{{ movie.name }}</h1>
+  <p><strong>Genre:</strong> {{ movie.genre }} | <strong>Language:</strong> {{ movie.language }}</p>
+  <p><strong>Rating:</strong> ⭐ {{ movie.rating }}</p>
+  <p>{{ movie.description }}</p>
+  <p><strong>Cast:</strong> {{ movie.cast }}</p>
+
+  {% if movie.trailer_url %}
+    <div class="mt-4">
+      <h3>🎬 Watch Trailer</h3>
+      <a href="{{ movie.trailer_url }}" target="_blank" class="btn btn-danger">
+        Open on YouTube
+      </a>
+    </div>
+  {% else %}
+    <p class="text-muted">Trailer not available.</p>
+  {% endif %}
+</div>
+{% endblock %}
